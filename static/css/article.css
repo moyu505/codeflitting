@@ -1,0 +1,10 @@
+.article{
+    background-color:#e7e7e7;
+    margin-top:-50px;
+}
+.article_title{
+    text-align:center;
+}
+.article_content{
+    padding:20px;
+}

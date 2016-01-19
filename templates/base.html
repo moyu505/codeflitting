@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/demo-customizations.css">
+  <link rel="stylesheet" type="text/css" href="static/css/wrapper.css">
+  <link rel="stylesheet" type="text/css" href="static/simditor-1.0.4/styles/font-awesome.css" />
+  <link rel="stylesheet" type="text/css" href="static/buttons/css/buttons.css" />
+
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div id="wrapper">
+        <div id="sidebar-wrapper" class="col-md-2">
+            <div id="sidebar">
+                <ul class="nav list-group">
+                    {% for info in infos %}
+                    <li>
+                        <a class="list-group-item" href="/article?id={{ info.split(':')[0] }}">{{ info.split(':')[1] }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div id="main-wrapper" class="col-md-10 pull-right">
+            <div id="main">
+                <div class="well popovers clearfix">
+                    {%  for info in infos %}
+                        <div class="popover top">
+                            <h1 class="popover-title text-center text-primary">
+                                <a href="/article?id={{ info.split(':')[0] }}" class="button button-pill button-flat-primary button-tiny">{{ info.split(':')[1] }}</a>
+                            </h1>
+                            <div class="popover-content">
+                                <p>
+                                    {% for tag in info.split(':')[2].split(',') %}
+                                    <a href="/?category={{ category }}&tag={{ tag }}" class="button button-pill button-flat button-tiny">{{ tag }}</a>
+                                    {% endfor %}
+                                </p>
+                                <p>
+                                    {% for category in info.split(':')[3].split(',') %}
+                                    <a href="/?category={{ category }}" class="button button-pill button-flat button-tiny">{{ category }}</a>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+</body>
+</html>

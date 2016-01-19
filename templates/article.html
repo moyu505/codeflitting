@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/demo-customizations.css">
+  <link rel="stylesheet" type="text/css" href="static/css/wrapper.css">
+  <link rel="stylesheet" type="text/css" href="static/css/article.css">
+  <link rel="stylesheet" type="text/css" href="static/simditor-1.0.4/styles/font-awesome.css" />
+  <link rel="stylesheet" type="text/css" href="static/buttons/css/buttons.css" />
+  <link rel="stylesheet" type="text/css" href="static/simditor-1.0.4/styles/simditor.css " />
+
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <div class="article">
+            <div class="article_title">
+                <br>
+                <br>
+                <h2>{{title}}</h2>
+            </div>
+            <div class="article_content">
+                {{content}}
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+</body>
+</html>
