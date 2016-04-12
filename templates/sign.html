@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="author" content="PY">
+
+    <title>Sign in </title>
+    <link href="static/css/sign.css" rel="stylesheet">
+<body>
+
+<div class="body-container">
+    <div class="body-block body-push">
+        <div class="auth-page-container">
+            <div class="main-form front">
+                <div class="main-form-inner">
+                    <div class="engine-name"></div>
+                    <form method="POST" action="/login" class="adm-form login-form" >
+                        <input type="hidden" name="action" value="registration">
+                        <div class="adm-login-row">
+                            <div class="adm-form-icon">
+                                <i class="fa fa-user"></i>
+                                <input class="login-input" type="text" placeholder="username" id="login" name="username">
+                            </div>
+                        </div>
+                        <div class="adm-login-row">
+                            <div class="adm-form-icon">
+                                <i class="fa fa-key"></i>
+                                <input class="login-input" type="password" placeholder="password" id="pwd" name="password">
+                            </div>
+                        </div>
+                        <div class="adm-login-row adm-clearfix adm-margin">
+                            <button class="adm-button-reverse adm-float-left toggler adm-button-small" type="button">
+                                <i class="fa fa-refresh"></i> restore password</button>
+                            <button class="adm-button-action adm-float-right" type="submit">Let me in<i class="fa fa-sign-in"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="main-form back">
+                <div class="main-form-inner">
+                    <div class="engine-name"></div>
+                    <form method="post" action="#" class="adm-form">
+                        <input type="hidden" name="action" value="reset_pwd">
+                        <div class="adm-login-row restore-pass">
+                            <div class="adm-form-icon">
+                                <i class="fa fa-envelope-o"></i>
+                                <input type="text" id="email" name="email" placeholder="your email" class="login-input">
+                            </div>
+                        </div>
+                        <div class="adm-login-row adm-clearfix adm-margin">
+                            <button class="adm-button adm-button-reverse adm-float-left toggler adm-button-small" type="button">
+                                <i class="fa fa-angle-left"></i> back</button>
+                            <button class="adm-button adm-button-action adm-float-right" type="submit">send 
+                                <i class="fa fa-angle-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+<script>$(document).ready(function () {
+
+    $(".toggler").on("click", function() {
+        $(".auth-page-container").toggleClass("flip");
+    });
+
+});//@ sourceURL=pen.js
+</script>
+</body>
+</html>
