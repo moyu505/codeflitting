@@ -1,12 +1,14 @@
 .article{
     background-color:#e7e7e7;
-    margin-top:-50px;
-    box-shadow: inset 0 0 20px rgb(41, 79, 90), 0 0.2px 0px;
+    margin-top: 30px;
+    box-shadow: inset 0 0 20px rgb(172, 179, 187), 0 0.2px 0px;
     margin-bottom: 20px;
 }
 .article_title{
-    text-align:center;
+    margin: 0 60px 0 60px;
+    text-align: -webkit-center;
+    border-bottom: 1px solid #D8D7D7;
 }
 .article_content{
-    padding:20px;
+    padding: 20px 60px 50px 60px;
 }
