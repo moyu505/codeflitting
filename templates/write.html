@@ -26,7 +26,7 @@
             {% if html %}
                 {{ html }}
             {% else %}
-                <p>start from here</p>
+                start from here
             {% endif %}
         </textarea>
         <br>
@@ -39,12 +39,14 @@
         </div>
         <button type="submit" class="button button-pill button-flat-primary">Submit</button>
     </form>
-	<script>
-		new SimpleMDE({
-			element: document.getElementById("markdown"),
-		    spellChecker: false,
-		});
-		</script>
-	</script>
+    <script>
+        new SimpleMDE({
+            element: document.getElementById("markdown"),
+            spellChecker: false,
+			autofocus: true,
+			tabSize: 4,
+        });
+        </script>
+    </script>
 </body>
 </html>
