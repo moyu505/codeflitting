@@ -1,14 +1,16 @@
 # -*- coding: UTF-8 -*-
 import time
+import json
 import torndb
 import tornado.wsgi, tornado.httpserver
 from jinja2 import Environment, FileSystemLoader
 from setting import *
-
+from markdown2 import Markdown
 class Application(tornado.wsgi.WSGIApplication):
     def __init__(self):
         handlers = [(r"/", HomePage),
                     (r'/login', LoginHandler),
+                    (r'/test', TestHandler),
                     (r'/logout', LogoutHandler),
                     (r'/write', WriteHandler),
                     (r'/article', ArticleHandler),
@@ -18,7 +20,7 @@ class Application(tornado.wsgi.WSGIApplication):
             cookie_secret='S6Bp2cVjSAGFXDZqyOh+hfn/fpBnaEzFh22IVmCsVJQ=',
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             login_url='/login',
-            #xsrf_cookies=True,
+            # xsrf_cookies=True,
             )
         tornado.wsgi.WSGIApplication.__init__(self, handlers, **settings)
         self.env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'),encoding='utf-8'))
@@ -37,6 +39,21 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def render(self, templates, parameter=dict()):
         self.write(self.application.env.get_template(templates).render(parameter))
+
+
+class TestHandler(BaseHandler):
+    """"""
+    def get(self):
+        cookie_dict = {}
+        func = self.get_argument('callback')
+        cookie_dict['cookie'] = self.get_cookie("username")
+        res  = func + '(' + json.dumps(cookie_dict) + ')'
+        self.set_header('Content-Type', 'application/javascript')
+        self.set_header("Access-Control-Allow-Origin", "http://www.baidu.com")
+        self.set_header("Access-Control-Allow-Credentials", True)
+        self.redirect("/")
+        print res
+        self.write(res)
 
 class HomePage(BaseHandler):
     """"""
@@ -60,12 +77,13 @@ class ArticleHandler(BaseHandler):
     """"""
     def get(self):
         parameter = {}
+        markdowner = Markdown(extras=['wiki-tables','fenced-code-blocks'])
         parameter['username'] = self.current_user
         article_id = self.get_argument('id')
         sql = "select * from pycoder_post where id=%s" % article_id
         article_info = self.db.query(sql)[0]
         parameter['title'] = article_info['title']
-        parameter['content'] = article_info['html']
+        parameter['content'] = markdowner.convert(article_info['html'])
         times = time.localtime(int(article_info['timestamp']))
         parameter['edit_time'] = time.strftime("%Y-%m-%d %H:%M:%S", times)
         self.render('article.html', parameter)
@@ -84,7 +102,7 @@ class WriteHandler(BaseHandler):
             return
         tag = self.get_argument('tag')
         category = self.get_argument('category')
-        content = self.get_argument('content').replace('\"',"\\\"").replace('%','%%')
+        content = self.get_argument('content')
         timestamp = str(int(time.time()))
         self.db.execute("insert into pycoder_post(title, tag, category, html, timestamp) values('%s', '%s', '%s', '%s', %s)" % (title, tag, category, content, timestamp));
         self.redirect('/')
